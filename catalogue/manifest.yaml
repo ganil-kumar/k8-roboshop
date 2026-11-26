@@ -8,8 +8,8 @@ metadata:
     tier: backend
     component: catalogue
 data:
-  MONOGO: "true"
-  MONOGO_URL: "mongodb://mongodb:27017/catalogue"
+  MONGO: "true"
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
 
 ---
 apiVersion: apps/v1
@@ -56,14 +56,14 @@ spec:
           tcpSocket:
             port: 8080
           failureThreshold: 2
-          PeriodSeconds: 10
+          periodSeconds: 10
           initialDelaySeconds: 5
-        livenessprobe:
+        livenessProbe:
           httpGet:
             path: /health
             port: 8080
           failureThreshold: 2
-          PeriodSeconds: 10 
+          periodSeconds: 10 
         envFrom:
         - configMapRef:
             name: catalogue
@@ -87,4 +87,4 @@ spec:
   ports:
   - protocol: TCP
     port: 8080 # service port
-    targetPort: 8080 # container        
+    targetPort: 8080 # container port        
